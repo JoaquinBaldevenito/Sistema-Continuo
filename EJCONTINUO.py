@@ -1,17 +1,6 @@
-
 # Parametros (Pasar a otro archivo txt) 
 import numpy as np
 import gnuplotlib as gp
-
-
-#r_1 = 1.0
-#r_2 = 0.8  
-#k_1 = 500
-#k_2 = 300  
-#alpha = 0.5
-#beta = 0.7
-#h = 0.1
-#time = 50
 
 def cargar_parametros():
     params = {}
@@ -21,52 +10,20 @@ def cargar_parametros():
             params[key] = float(value)
     return params
 
-t=0
-d = {}
-p = {}
-
-# Cargar parámetros
-params = cargar_parametros()
-
-# Asignar parámetros a variables
-r_1 = params['r_1']
-r_2 = params['r_2']
-k_1 = params['k_1']
-k_2 = params['k_2']
-alpha = params['alpha']
-beta = params['beta']
-h = params['h']
-time = params['time']
-p_0 = params['p_0']
-d_0 = params['d_0']
-
-diferencial_p = lambda t: r_1 * p[round(t, 1)] *(1-((p[round(t, 1)] + alpha * d[round(t, 1)])/k_1))
-
-diferencial_d = lambda t: r_2 * d[round(t, 1)] *(1-((d[round(t, 1)] + beta * p[round(t, 1)])/k_2))
-
-def euler1(t, h, p):
+def euler_p(t, h, p,diferencial_p):
   p[round(t + h, 1)] = p[round(t, 1)] + h * diferencial_p(t)
   
     
-def euler2(t, h, d):
+def euler_d(t, h, d,diferencial_d):
   d[round(t+h,1)] = d[round(t, 1)] + h * diferencial_d(t)
 
+def metodo_Euler(t,h,p,d,time,diferencial_p,diferencial_d):
+  while( t<=time):
+        euler_p(t,h,p,diferencial_p)
+        euler_d(t,h,d,diferencial_d)
+        t+=h
 
-def main():
-    t = 0
-    cargar_parametros()
-    while( t<=time):
-      euler1(t,h,p)
-      euler2(t,h,d)
-      t+=h
-    
-    graficar_relacion()
-    #graficar_Poblaciones()
-    
-    
-  #charge params and run simulation
-
-def graficar_Poblaciones():
+def graficar_Poblaciones(d,p):
     
     t_vals = np.array(sorted(d.keys()))
     d_vals = np.array([d[t] for t in t_vals])
@@ -79,8 +36,7 @@ def graficar_Poblaciones():
             xlabel='Tiempo',
             ylabel='Población')
 
-
-def graficar_relacion():
+def graficar_relacion(d,p):
     
     t_vals = np.array(sorted(d.keys()))
     d_vals = np.array([d[t] for t in t_vals])
@@ -92,6 +48,40 @@ def graficar_relacion():
             xlabel='Conejos',
             ylabel='Ciervos')
 
+def main():
+  
+  t=0
+  d = {}
+  p = {}
 
+  params = cargar_parametros()
+  r_1 = params['r_1']
+  r_2 = params['r_2']
+  k_1 = params['k_1']
+  k_2 = params['k_2']
+  alpha = params['alpha']
+  beta = params['beta']
+  h = params['h']
+  time = params['time']
+  p[0] = params['p_0']
+  d[0] = params['d_0']
+  grafico = params['grafico']
+  metodo = params['metodo']
+  
+  diferencial_p = lambda t: r_1 * p[round(t, 1)] *(1-((p[round(t, 1)] + alpha * d[round(t, 1)])/k_1))
+
+  diferencial_d = lambda t: r_2 * d[round(t, 1)] *(1-((d[round(t, 1)] + beta * p[round(t, 1)])/k_2))
+
+  if metodo == 1:
+    metodo_Euler(t,h,p,d,time,diferencial_p,diferencial_d)
+  else:
+    metodo_Backward_Euler()
+
+
+  if grafico == 1:
+    graficar_Poblaciones(d,p)
+  else:
+    graficar_relacion(d,p)
+    
 if __name__ == "__main__":
   main()

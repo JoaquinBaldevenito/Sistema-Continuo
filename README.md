@@ -38,7 +38,27 @@ h = 0.1
 time = 50
 p_0 = 100
 d_0 = 50
+grafico = 1
+metodo = 1
 ```
+
+### Descripción de los parámetros
+
+* `r_1`, `r_2`: Tasas de crecimiento de las especies.
+* `k_1`, `k_2`: Capacidad de carga de cada especie.
+* `alpha`, `beta`: Factores de competencia entre especies.
+* `h`: Tamaño del paso para el método numérico.
+* `time`: Tiempo total de simulación.
+* `p_0`, `d_0`: Valores iniciales de población para cada especie.
+* `grafico`: Tipo de gráfico a mostrar:
+
+  * `1` → Poblaciones en función del tiempo.
+  * `0` → Relación entre poblaciones (`p` vs `d`).
+* `metodo`: Método numérico a utilizar:
+
+  * `1` → Método de Euler (explícito).
+  * `0` → Método de Backward-Euler.
+
 
 > Puedes modificar estos valores para experimentar con distintos escenarios de simulación.
 
@@ -51,16 +71,4 @@ python main.py
 ```
 
 Esto simulará el comportamiento de las poblaciones a lo largo del tiempo y mostrará una gráfica de la relación entre ambas en el plano.
-
-## Salida
-
-El programa generará un gráfico que representa la evolución de las poblaciones en el plano `p(t)` vs `d(t)`.
-
-> Si quieres también visualizar las poblaciones en función del tiempo, puedes descomentar la línea correspondiente en la función `main()`:
-
-```python
-graficar_Poblaciones()
-```
-
----
 
