@@ -1,4 +1,3 @@
-# Parametros (Pasar a otro archivo txt) 
 import numpy as np
 import gnuplotlib as gp
 
@@ -10,19 +9,27 @@ def cargar_parametros():
             params[key] = float(value)
     return params
 
-def euler_p(t, h, p,diferencial_p):
-  p[round(t + h, 1)] = p[round(t, 1)] + h * diferencial_p(t)
-  
-    
-def euler_d(t, h, d,diferencial_d):
-  d[round(t+h,1)] = d[round(t, 1)] + h * diferencial_d(t)
+
+def euler(t, h, f,df):
+  f[round(t + h, 1)] = f[round(t, 1)] + h * df(t)
 
 def metodo_Euler(t,h,p,d,time,diferencial_p,diferencial_d):
   while( t<=time):
-        euler_p(t,h,p,diferencial_p)
-        euler_d(t,h,d,diferencial_d)
-        t+=h
+    euler(t,h,p,diferencial_p)
+    euler(t,h,d,diferencial_d)
+    t+=h
 
+def trapezoidal(t, h, f,g,df,dg):
+  euler(t,h,f,df)
+  euler(t,h,g,dg)
+  f[round(t + h, 1)] = f[round(t, 1)] + h * 0.5 * ( df(round(t + h,1)) + df(round(t,1)))
+
+def metodo_Trapezoidal(t,h,p,d,time,diferencial_p,diferencial_d):
+  while(t<= time):
+    trapezoidal(t,h,p,d,diferencial_p,diferencial_d)
+    trapezoidal(t,h,d,p,diferencial_d,diferencial_p)
+    t+=h
+    
 def graficar_Poblaciones(d,p):
     
     t_vals = np.array(sorted(d.keys()))
@@ -75,7 +82,7 @@ def main():
   if metodo == 1:
     metodo_Euler(t,h,p,d,time,diferencial_p,diferencial_d)
   else:
-    metodo_Backward_Euler()
+    metodo_Trapezoidal(t,h,p,d,time,diferencial_p,diferencial_d)
 
 
   if grafico == 1:

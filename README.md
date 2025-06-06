@@ -36,8 +36,8 @@ alpha = 0.5
 beta = 0.7
 h = 0.1
 time = 50
-p_0 = 100
-d_0 = 50
+p_0 = 50
+d_0 = 100
 grafico = 1
 metodo = 1
 ```
