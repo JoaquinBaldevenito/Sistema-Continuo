@@ -8,19 +8,19 @@ Este proyecto implementa un modelo basado en ecuaciones diferenciales para simul
 
 Antes de ejecutar el código, asegúrate de tener instalado Python 3 y las siguientes dependencias:
 
-```bash
+```
 pip install numpy gnuplotlib
 ```
 
 > ⚠️ `gnuplotlib` requiere que tengas instalado **Gnuplot** en tu sistema. En Debian/Ubuntu puedes instalarlo con:
 
-```bash
+```
 sudo apt install gnuplot
 ```
 
 ## Estructura del Proyecto
 
-* `main.py` – Código principal del modelo.
+* `Competencia.py` – Código principal del modelo.
 * `parametros.txt` – Archivo de texto con los parámetros de la simulación.
 
 ## Formato del archivo `parametros.txt`
@@ -66,8 +66,8 @@ metodo = 1
 
 Una vez configurado el entorno y creado el archivo `parametros.txt`, simplemente ejecuta el script:
 
-```bash
-python main.py
+```
+python3 Competencia.py
 ```
 
 Esto simulará el comportamiento de las poblaciones a lo largo del tiempo y mostrará una gráfica de la relación entre ambas en el plano.
