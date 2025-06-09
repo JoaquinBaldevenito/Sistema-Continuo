@@ -1,7 +1,6 @@
 import numpy as np
 import gnuplotlib as gp
 
-
 # Función para cargar parámetros desde un archivo de texto
 def cargar_parametros():
     params = {}
@@ -37,7 +36,6 @@ def metodo_Trapezoidal(t,h,p,d,time,diferencial_p,diferencial_d):
 
 # Grafica las poblaciones d(t) y p(t) en función del tiempo
 def graficar_Poblaciones(d,p):
-    
     t_vals = np.array(sorted(d.keys()))
     d_vals = np.array([d[t] for t in t_vals])
     p_vals = np.array([p[t] for t in t_vals])
@@ -64,7 +62,6 @@ def graficar_relacion(d,p):
 
 # Función principal del programa
 def main():
-  
   t=0
   d = {} # Poblacion ciervos
   p = {} # Poblacion conejos
@@ -93,7 +90,6 @@ def main():
     metodo_Euler(t,h,p,d,time,diferencial_p,diferencial_d)
   else:
     metodo_Trapezoidal(t,h,p,d,time,diferencial_p,diferencial_d)
-
 
   if grafico == 1:
     graficar_Poblaciones(d,p)
