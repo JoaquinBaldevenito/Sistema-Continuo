@@ -46,6 +46,7 @@ def graficar_Poblaciones(d,p):
             title='Funciones d(t) y p(t)',
             xlabel='Tiempo',
             ylabel='Población')
+    input("Presioná ENTER para cerrar el gráfico y continuar...")
 
 # Grafica la relación entre p(t) y d(t) en el plano fase
 def graficar_relacion(d,p):
@@ -59,6 +60,7 @@ def graficar_relacion(d,p):
             title='Relacion plano p-d',
             xlabel='Conejos',
             ylabel='Ciervos')
+    input("Presioná ENTER para cerrar el gráfico y continuar...")
 
 # Función principal del programa
 def main():
@@ -77,7 +79,6 @@ def main():
   time = params['time']
   p[0] = params['p_0']
   d[0] = params['d_0']
-  grafico = params['grafico']
   metodo = params['metodo']
   
   # Derivada de p(t) según modelo logístico con interacción
@@ -91,10 +92,8 @@ def main():
   else:
     metodo_Trapezoidal(t,h,p,d,time,diferencial_p,diferencial_d)
 
-  if grafico == 1:
-    graficar_Poblaciones(d,p)
-  else:
-    graficar_relacion(d,p)
+  graficar_Poblaciones(d,p)
+  graficar_relacion(d,p)
 
 # Punto de entrada del script
 if __name__ == "__main__":

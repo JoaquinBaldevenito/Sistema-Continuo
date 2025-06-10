@@ -71,4 +71,5 @@ python3 Competencia.py
 ```
 
 Esto simulará el comportamiento de las poblaciones a lo largo del tiempo y mostrará una gráfica de la relación entre ambas en el plano.
+Primero se mostrara el grafico de poblaciones, luego ingresando enter en la consola se pasara a ver el grafico de relacion.
 
