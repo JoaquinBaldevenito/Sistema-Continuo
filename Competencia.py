@@ -41,8 +41,8 @@ def graficar_Poblaciones(d,p):
     p_vals = np.array([p[t] for t in t_vals])
 
     # Graficar ambas funciones
-    gp.plot((t_vals, d_vals, {'with': 'linespoints', 'legend': 'd(t)'}),
-            (t_vals, p_vals, {'with': 'linespoints', 'legend': 'p(t)'}),
+    gp.plot((t_vals, d_vals, {'with': 'linespoints pointtype 7 pointsize 0', 'legend': 'd(t)'}),
+            (t_vals, p_vals, {'with': 'linespoints pointtype 7 pointsize 0', 'legend': 'p(t)'}),
             title='Funciones d(t) y p(t)',
             xlabel='Tiempo',
             ylabel='Población')
@@ -56,7 +56,7 @@ def graficar_relacion(d,p):
     p_vals = np.array([p[t] for t in t_vals])
 
     # Graficar ambas funciones
-    gp.plot((p_vals, d_vals, {'with': 'linespoints', 'legend': 'Relacion'}),
+    gp.plot((p_vals, d_vals, {'with': 'linespoints pointtype 7 pointsize 0', 'legend': 'Relacion'}),
             title='Relacion plano p-d',
             xlabel='Conejos',
             ylabel='Ciervos')
